@@ -1,9 +1,16 @@
-
+import time
+from selenium.webdriver.common.by import By
+from selenium.webdriver import Keys, ActionChains
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium import webdriver
 
 
 class BasePage():
     def __init__(self, driver):
         self.driver = driver
+        self.SELECTED_PRODUCT=[]
+        self.CART_PRODUCT=[]
 
     """Method get current url"""
 
@@ -28,7 +35,3 @@ class BasePage():
 
     """Method assert page text"""
 
-    def assert_word(self, word, result):
-        value_word = word.text
-        assert value_word == result
-        print("Assert word - PASSED")
