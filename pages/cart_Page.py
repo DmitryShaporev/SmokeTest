@@ -1,4 +1,5 @@
-from Pages.base_page import *
+
+from pages.base_page import *
 
 
 class Cart_Page(BasePage):
@@ -20,12 +21,22 @@ class Cart_Page(BasePage):
     def get_product_price(self):
         return WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.XPATH, self.product_price)))
 
+    def get_order_button(self):
+        return WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.XPATH, self.order_button)))
+
+
     def check_cart(self):
         time.sleep(3)
-        self.CART_PRODUCT.append(self.get_product_title().text)
-        self.CART_PRODUCT.append(self.get_product_price().text[:-2])
-        print(self.CART_PRODUCT)
+        CART_PRODUCT.append(self.get_product_title().text)
+        CART_PRODUCT.append(self.get_product_price().text[:-2])
+
 
     def cart(self):
         self.check_cart()
+
+    def click_order(self):
+        self.get_order_button().click()
+
+
+
 

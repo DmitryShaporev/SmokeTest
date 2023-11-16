@@ -1,5 +1,5 @@
 
-from Pages.base_page import *
+from pages.base_page import *
 
 
 class Main_Page(BasePage):
@@ -140,9 +140,9 @@ class Main_Page(BasePage):
         self.click_button_show()
         time.sleep(3)
         '''Получаем название и цену товара для последующего сравнения'''
-        self.SELECTED_PRODUCT.append(self.get_selected_title().text)
-        self.SELECTED_PRODUCT.append(self.get_selected_price().text)
-        print(self.SELECTED_PRODUCT)
+        SELECTED_PRODUCT.append(self.get_selected_title().text)
+        SELECTED_PRODUCT.append(self.get_selected_price().text)
+
         self.click_cart_button()
         '''Переходим в корзину'''
         self.move_to_cart()
