@@ -2,7 +2,7 @@ from faker import Faker
 from pages.base_page import *
 
 fake=Faker()
-class Order_Page(BasePage):
+class PersonalData_Page(BasePage):
 
     def __init__(self,driver):
         super().__init__(driver)
@@ -13,6 +13,7 @@ class Order_Page(BasePage):
     name="//input[@id='checkout_1']"
     email="//input[@id='checkout_2']"
     phone="//input[@id='checkout_3']"
+    next_button="//button[@class='form__submit form__submit_no-fluid button']"
 
         #getters
     def get_name(self):
@@ -24,6 +25,8 @@ class Order_Page(BasePage):
     def get_phone(self):
         return WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.XPATH, self.phone)))
 
+    def get_next_button(self):
+        return WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.XPATH, self.next_button)))
 
     def name_input(self):
         self.get_name().send_keys(fake.name())
@@ -33,6 +36,16 @@ class Order_Page(BasePage):
 
     def phone_input(self):
         self.get_phone().send_keys(fake.numerify(text='913 %%%-%%-%%'))
+
+    def click_next_button(self):
+        self.get_next_button().click()
+
+    def input_personal_data(self):
+        self.name_input()
+        self.email_input()
+        self.phone_input()
+        self.click_next_button()
+
 
 
 

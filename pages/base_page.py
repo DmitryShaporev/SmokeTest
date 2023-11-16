@@ -1,3 +1,4 @@
+import datetime
 import time
 from selenium.webdriver.common.by import By
 from selenium.webdriver import Keys, ActionChains
@@ -22,6 +23,12 @@ class BasePage():
         return self.driver.find_element(by, locator)
 
     """Method Screenshot"""
+
+    def make_screenshot(self):
+        now_date = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
+        name_screen = "screenshot" + now_date + ".png"
+        self.driver.save_screenshot("C:\\SmokeTest\\Screenshots\\" + name_screen)
+        print("Создан скриншот страницы оплаты" + name_screen)
 
 
 
