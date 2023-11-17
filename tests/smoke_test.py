@@ -1,3 +1,5 @@
+'''Тестируется покупка пылесоса на сайте kuvalda.ru'''
+
 from selenium.webdriver.chrome.options import Options
 from pages.mainPage import *
 from pages.cart_Page import *
