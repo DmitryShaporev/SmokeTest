@@ -1,6 +1,6 @@
-
+import allure
 from pages.base_page import *
-
+from utilities.logger import Logger
 
 class Main_Page(BasePage):
     url = 'https://www.kuvalda.ru/'
@@ -112,40 +112,43 @@ class Main_Page(BasePage):
     #methods
 
     def ShowMainPage_and_CheckURL(self):
-        self.driver.maximize_window()
-        self.driver.get(self.url)
+        with allure.step("Выбор товара на главной странице"):
+            Logger.add_start_step(method="ShowMainPage_and_CheckURL")
+            self.driver.maximize_window()
+            self.driver.get(self.url)
 
-        '''Открываем каталог товаров'''
-        self.click_catalog()
+            '''Открываем каталог товаров'''
+            self.click_catalog()
 
-        '''Наводим мышь на нужный пункт меню'''
-        self.hover_menu_item()
+            '''Наводим мышь на нужный пункт меню'''
+            self.hover_menu_item()
 
-        '''Клик по пункту подменю'''
-        self.click_submenu_item()
-        time.sleep(5)
-        '''Проверка перехода на нужную страницу'''
-        self.assert_url('https://www.kuvalda.ru/catalog/1939/')
+            '''Клик по пункту подменю'''
+            self.click_submenu_item()
+            time.sleep(5)
+            '''Проверка перехода на нужную страницу'''
+            self.assert_url('https://www.kuvalda.ru/catalog/1939/')
 
-        '''Выбираем  бренд'''
-        self.click_brand()
-        time.sleep(3)
-        '''Клик на ссылку "Показать"'''
-        self.show_refer().click()
-        '''Клик на фильтр цен'''
-        self.click_price_slider()
-        self.input_min_price()
-        self.input_max_price()
-        '''Клик на кнопку Показать'''
-        self.click_button_show()
-        time.sleep(3)
-        '''Получаем название и цену товара для последующего сравнения'''
-        SELECTED_PRODUCT.append(self.get_selected_title().text)
-        SELECTED_PRODUCT.append(self.get_selected_price().text)
+            '''Выбираем  бренд'''
+            self.click_brand()
+            time.sleep(3)
+            '''Клик на ссылку "Показать"'''
+            self.show_refer().click()
+            '''Клик на фильтр цен'''
+            self.click_price_slider()
+            self.input_min_price()
+            self.input_max_price()
+            '''Клик на кнопку Показать'''
+            self.click_button_show()
+            time.sleep(3)
+            '''Получаем название и цену товара для последующего сравнения'''
+            SELECTED_PRODUCT.append(self.get_selected_title().text)
+            SELECTED_PRODUCT.append(self.get_selected_price().text)
 
-        self.click_cart_button()
-        '''Переходим в корзину'''
-        self.move_to_cart()
+            self.click_cart_button()
+            '''Переходим в корзину'''
+            self.move_to_cart()
+            Logger.add_end_step(url=self.driver.current_url, method="ShowMainPage_and_CheckURL")
 
 
 

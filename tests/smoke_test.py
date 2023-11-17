@@ -1,20 +1,15 @@
-import pytest
 from selenium.webdriver.chrome.options import Options
 from pages.mainPage import *
 from pages.cart_Page import *
 from pages.deliveryMethod_Page import *
 from pages.personalData_Page import *
+import allure
 
 options = Options()
 options.page_load_strategy = 'eager'
 options.add_experimental_option('excludeSwitches', ['enable-logging'])
 
-@pytest.fixture(scope="module")
-def set_up():
-    print("\nНачало тестирования")
-    yield
-    print("\nТестирование закончено")
-
+@allure.description("Test buy product")
 def test_buy_product(set_up):
     driver = webdriver.Chrome(options=options)
     '''Главная страница'''
@@ -41,12 +36,6 @@ def test_buy_product(set_up):
 
     '''Подтверждение - скриншот'''
     dp.make_screenshot()
-
-
-
-
-
-
 
     time.sleep(10)
 

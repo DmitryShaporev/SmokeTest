@@ -1,5 +1,8 @@
+'''Для ввода случайных данных в поля используется библиотека Faker'''
+import allure
 from faker import Faker
 from pages.base_page import *
+from utilities.logger import Logger
 
 fake=Faker()
 class PersonalData_Page(BasePage):
@@ -41,10 +44,13 @@ class PersonalData_Page(BasePage):
         self.get_next_button().click()
 
     def input_personal_data(self):
-        self.name_input()
-        self.email_input()
-        self.phone_input()
-        self.click_next_button()
+        with allure.step("Заполнение персональных данных"):
+            Logger.add_start_step(method="input_personal_data")
+            self.name_input()
+            self.email_input()
+            self.phone_input()
+            self.click_next_button()
+            Logger.add_end_step(url=self.driver.current_url, method="input_personal_data")
 
 
 

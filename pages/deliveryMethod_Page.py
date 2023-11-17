@@ -1,5 +1,7 @@
+import allure
 from faker import Faker
 from pages.base_page import *
+from utilities.logger import Logger
 
 fake=Faker()
 class DeliveryMethod_Page(BasePage):
@@ -62,9 +64,8 @@ class DeliveryMethod_Page(BasePage):
     def click_confirm_button(self):
         self.get_confirm_button().click()
 
-
-
     def input_delivery_data(self):
+        Logger.add_start_step(method="input_delivery_data")
         self.click_courier_button()
         self.city_input()
         self.street_input()
@@ -73,9 +74,13 @@ class DeliveryMethod_Page(BasePage):
         self.click_next_button()
         self.click_other_deliver()
         self.click_next_button()
+        Logger.add_end_step(url=self.driver.current_url, method="input_delivery_data")
 
     def confirm_order(self):
-        self.click_confirm_button()
+        with allure.step("Подтверждение заказ. Переход на страницу оплаты"):
+            Logger.add_start_step(method="input_delivery_data")
+            self.click_confirm_button()
+            Logger.add_end_step(url=self.driver.current_url, method="input_delivery_data")
 
 
 

@@ -31,7 +31,6 @@ class BasePage():
         print("Создан скриншот страницы оплаты" + name_screen)
 
 
-
     """Method assert url"""
 
     def assert_url(self, result):

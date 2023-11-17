@@ -1,4 +1,5 @@
-
+import allure
+from utilities.logger import Logger
 from pages.base_page import *
 
 
@@ -26,9 +27,12 @@ class Cart_Page(BasePage):
 
 
     def check_cart(self):
-        time.sleep(3)
-        CART_PRODUCT.append(self.get_product_title().text)
-        CART_PRODUCT.append(self.get_product_price().text[:-2])
+        with allure.step("Проверка корзины"):
+            Logger.add_start_step(method="check_cart")
+            time.sleep(3)
+            CART_PRODUCT.append(self.get_product_title().text)
+            CART_PRODUCT.append(self.get_product_price().text[:-2])
+            Logger.add_end_step(url=self.driver.current_url, method="check_cart")
 
 
     def cart(self):
